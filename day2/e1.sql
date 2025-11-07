@@ -1,0 +1,46 @@
+SELECT * FROM emp;
+
+DELIMITER //
+CREATE PROCEDURE ep1(in userinput varchar(20))
+BEGIN
+	SELECT count(*) FROM emp WHERE empname = userinput;
+END //
+DELIMITER ;
+
+CALL ep1('user2');
+
+DELIMITER //
+CREATE TRIGGER et1
+AFTER INSERT ON emp
+FOR EACH ROW
+BEGIN
+		SET @res = (SELECT count(*) FROM emp);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER et2
+AFTER UPDATE ON emp
+FOR EACH ROW
+BEGIN
+		SET @res = (SELECT count(*) FROM emp);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER et3
+AFTER DELETE ON emp
+FOR EACH ROW
+BEGIN
+		SET @res = (SELECT count(*) FROM emp);
+END //
+DELIMITER ;
+
+INSERT INTO emp VALUES(6,'user6',6000,102);
+SELECT @res;
+UPDATE emp SET empname = 'user7' WHERE empid = 6;
+SELECT @res;
+DELETE FROM emp WHERE empid = 6;
+SELECT @res;
+
+

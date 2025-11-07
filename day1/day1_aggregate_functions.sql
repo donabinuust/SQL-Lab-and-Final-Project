@@ -1,0 +1,5 @@
+SELECT SUM(sal) FROM emp;
+SELECT AVG(sal) FROM emp;
+SELECT MIN(sal) FROM emp;
+SELECT MAX(sal) FROM emp;
+SELECT COUNT(empid) FROM emp;
